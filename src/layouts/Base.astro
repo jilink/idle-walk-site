@@ -1,0 +1,131 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Seo from '../components/Seo.astro';
+import PlayBadge from '../components/PlayBadge.astro';
+import icon from '../assets/brand/icon.webp';
+import { NAV, PLAY_URL, PRIVACY_URL, TERMS_URL, SUPPORT_URL, CONTACT_EMAIL, GA_ID, PLAUSIBLE_DOMAIN, SITE_NAME } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object[];
+  crumbs?: { name: string; path: string }[];
+  noindex?: boolean;
+}
+const { title, description, path, jsonLd = [], crumbs, noindex = false } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: site + '/',
+  inLanguage: 'fr',
+};
+const breadcrumb = crumbs && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Accueil', path: '/' }, ...crumbs].map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: c.name, item: site + c.path,
+  })),
+};
+const ld = [org, ...(breadcrumb ? [breadcrumb] : []), ...jsonLd];
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Seo title={title} description={description} path={path} jsonLd={ld} noindex={noindex} />
+    {GA_ID && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} is:inline></script>}
+    {GA_ID && <script is:inline define:vars={{ GA_ID }}>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});</script>}
+    {PLAUSIBLE_DOMAIN && <script defer is:inline data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js"></script>}
+  </head>
+  <body>
+    <a href="#contenu" class="sr">Aller au contenu</a>
+    <header class="top">
+      <div class="wrap bar">
+        <a href="/" class="brand" aria-label="Idle Walk, accueil">
+          <Image src={icon} alt="" width={44} height={44} loading="eager" />
+          <span>Idle Walk</span>
+        </a>
+        <nav aria-label="Navigation principale" class="desk">
+          {NAV.map((n) => <a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+        <a class="btn small deskbtn" href={PLAY_URL} rel="noopener" data-place="header">Télécharger</a>
+        <details class="burger">
+          <summary aria-label="Menu"><span></span></summary>
+          <nav aria-label="Menu mobile">
+            {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+            <a class="btn small" href={PLAY_URL} rel="noopener" data-place="menu">Télécharger gratuitement</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="contenu"><slot /></main>
+
+    <footer class="foot">
+      <div class="wrap fgrid">
+        <div>
+          <a href="/" class="brand light"><Image src={icon} alt="" width={44} height={44} /> <span>Idle Walk</span></a>
+          <p class="fsmall">Le jeu de marche qui transforme tes pas en aventure. Disponible sur Android.</p>
+          <PlayBadge width={170} place="footer" />
+        </div>
+        <nav aria-label="Pages du site">
+          <h2>Le site</h2>
+          <ul>
+            <li><a href="/">Accueil</a></li>
+            {NAV.map((n) => <li><a href={n.href}>{n.label === 'Le jeu' ? 'Jeu de marche' : n.label === 'Motivation' ? 'Motivation marche' : n.label === 'Podomètre' ? 'Podomètre ludique' : n.label}</a></li>)}
+          </ul>
+        </nav>
+        <nav aria-label="Informations légales et contact">
+          <h2>Infos</h2>
+          <ul>
+            <li><a href={PLAY_URL} rel="noopener">Fiche Google Play</a></li>
+            <li><a href={PRIVACY_URL} rel="noopener">Politique de confidentialité</a></li>
+            <li><a href={TERMS_URL} rel="noopener">Conditions d'utilisation</a></li>
+            <li><a href={SUPPORT_URL} rel="noopener">Assistance</a></li>
+            <li><a href={`mailto:${CONTACT_EMAIL}`}>Nous contacter</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="wrap legal">
+        <p>© {new Date().getFullYear()} Idle Walk. Google Play et le logo Google Play sont des marques de Google LLC. Idle Walk est un jeu, pas un dispositif médical.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  .top { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 3px solid var(--brown); }
+  .bar { display: flex; align-items: center; gap: 1.2rem; padding-block: .55rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 900; font-size: 1.35rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+  .brand img { border-radius: 12px; }
+  .desk { display: none; gap: .3rem; }
+  .desk a { text-decoration: none; color: var(--ink); font-weight: 800; padding: .4em .8em; border-radius: 12px; }
+  .desk a:hover, .desk a[aria-current] { background: var(--mint); }
+  .deskbtn { display: none; }
+  .burger { position: relative; }
+  .burger summary { list-style: none; cursor: pointer; width: 46px; height: 46px; border: 3px solid var(--brown); border-radius: 14px; background: var(--card); display: grid; place-items: center; }
+  .burger summary::-webkit-details-marker { display: none; }
+  .burger summary span, .burger summary span::before, .burger summary span::after { display: block; width: 20px; height: 3px; background: var(--brown); border-radius: 2px; position: relative; content: ''; }
+  .burger summary span::before { position: absolute; top: -7px; } .burger summary span::after { position: absolute; top: 7px; }
+  .burger nav { position: absolute; right: 0; top: 58px; width: min(280px, 86vw); display: grid; gap: .3rem; background: var(--card); border: 3px solid var(--brown); border-radius: 18px; box-shadow: var(--edge); padding: .8rem; }
+  .burger nav a:not(.btn) { padding: .6em .8em; text-decoration: none; font-weight: 800; color: var(--ink); border-radius: 10px; }
+  .burger nav a:not(.btn):hover { background: var(--mint); }
+  @media (min-width: 860px) { .desk, .deskbtn { display: flex; } .burger { display: none; } }
+
+  .foot { background: var(--ink); color: #dbe8dd; margin-top: 0; padding-top: 3rem; }
+  .foot a { color: #fff; }
+  .foot .brand.light { color: #fff; margin-bottom: .6rem; }
+  .fgrid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .foot h2 { font-size: 1rem; color: var(--yellow); text-transform: uppercase; letter-spacing: .08em; }
+  .foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; }
+  .fsmall { font-size: .95rem; }
+  .legal { border-top: 1px solid #ffffff30; margin-top: 2rem; padding-block: 1.2rem 2rem; font-size: .85rem; color: #a9c0ae; }
+</style>

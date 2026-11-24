@@ -1,0 +1,23 @@
+---
+interface Props { current: string }
+const { current } = Astro.props;
+const all = [
+  { href: '/jeu-de-marche/', t: 'Le jeu de marche', d: 'Le principe d’un jeu basé sur la marche.' },
+  { href: '/podometre-ludique/', t: 'Le podomètre ludique', d: 'Quand le compteur de pas devient un jeu.' },
+  { href: '/motivation-marche/', t: 'La motivation à marcher', d: 'Transformer une habitude en petite aventure.' },
+  { href: '/faq/', t: 'La FAQ', d: 'Toutes les réponses sur Idle Walk.' },
+].filter((x) => x.href !== current);
+---
+<section class="section band-mint wave-top">
+  <div class="wrap">
+    <h2 class="center">Continue la découverte</h2>
+    <div class="grid g3">
+      {all.map((x) => <a class="card rel" href={x.href}><h3>{x.t}</h3><p>{x.d}</p></a>)}
+    </div>
+  </div>
+</section>
+<style>
+  .rel { text-decoration: none; color: var(--ink); display: block; transition: transform .12s; }
+  .rel:hover { transform: translateY(-3px); color: var(--ink); }
+  .rel h3 { color: var(--green-deep); }
+</style>

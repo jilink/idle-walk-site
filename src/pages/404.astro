@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+---
+<Base noindex title="Page introuvable | Idle Walk" description="Cette page n'existe pas. Retourne à l'accueil d'Idle Walk, le jeu de marche." path="/404/">
+  <section class="section center"><div class="wrap narrow">
+    <h1>Oups, tu t'es perdu en chemin</h1>
+    <p class="lead">Cette page n'existe pas. Reviens sur le bon chemin :</p>
+    <p><a class="btn ghost" href="/">Retour à l'accueil</a></p>
+    <Cta place="404" badge={false} />
+  </div></section>
+</Base>

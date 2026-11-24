@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Related from '../components/Related.astro';
+import FinalCta from '../components/FinalCta.astro';
+import activite from '../assets/shots/activite.webp';
+import accueil from '../assets/shots/accueil.webp';
+import classement from '../assets/shots/classement.webp';
+import coin from '../assets/brand/coin.webp';
+---
+<Base
+  title="Podomètre ludique : un compteur de pas qui récompense | Idle Walk"
+  description="Idle Walk est un podomètre ludique : un compteur de pas jeu qui transforme chaque pas en pièces, bonus et progression. Découvre le principe et la gamification."
+  path="/podometre-ludique/"
+  crumbs={[{ name: 'Podomètre ludique', path: '/podometre-ludique/' }]}
+>
+  <PageHead eyebrow="Podomètre ludique" title="Un podomètre ludique qui récompense chaque pas" intro="Idle Walk combine un vrai compteur de pas et un jeu : tes pas se transforment en monnaie virtuelle, en bonus et en progression." place="podometre">
+    <div class="shot"><Image src={activite} alt="Podomètre ludique Idle Walk : pas réels du jour et historique de la semaine" widths={[280, 420, 560]} sizes="280px" loading="eager" fetchpriority="high" /></div>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Qu'est-ce qu'un podomètre gamifié ?</h2>
+      <p>La gamification consiste à utiliser des mécaniques de jeu (points, niveaux, défis, collections) dans une activité qui n'en est pas un à l'origine. Appliquée à un podomètre, elle donne un compteur de pas qui te récompense : chaque pas compte pour quelque chose dans un jeu.</p>
+      <p>Idle Walk est construit sur cette idée. Ce n'est pas un simple affichage de chiffres, c'est un jeu complet dont le moteur est ton compteur de pas.</p>
+
+      <h2>Comment fonctionne le podomètre d'Idle Walk</h2>
+      <ul>
+        <li><strong>Un suivi en direct :</strong> le capteur de mouvement du téléphone compte tes pas pendant que tu marches.</li>
+        <li><strong>Un historique fiable :</strong> sur Android, Idle Walk lit aussi les pas enregistrés dans Health Connect, ce qui permet de retrouver ceux marchés application fermée.</li>
+        <li><strong>Lecture seule :</strong> l'application lit tes pas, elle n'écrit rien dans Health Connect.</li>
+        <li><strong>Un écran Activité :</strong> tes pas réels du jour, un graphique semaine ou mois, la moyenne par jour et le total de la semaine.</li>
+      </ul>
+      <div class="callout"><p><strong>Astuce :</strong> pour un comptage plus fiable, garde ton téléphone sur toi (poche, sac) pendant que tu marches.</p></div>
+
+      <h2>Des pas transformés en monnaie virtuelle</h2>
+      <p>C'est le cœur du compteur de pas avec récompenses d'Idle Walk : chaque pas se convertit en pièces. L'écran d'accueil affiche ton total de pièces, ton nombre de pièces par pas et tes pas du jour.</p>
+      <p>En version gratuite, la conversion en pièces va jusqu'à 1 500 pas par jour ; ton compteur de pas réel, lui, continue de compter sans limite. Le Premium optionnel lève cette limite quotidienne de conversion.</p>
+    </div>
+  </section>
+
+  <section class="section band-mint wave-top">
+    <div class="wrap">
+      <h2 class="center">Ce que ça change à chaque pas</h2>
+      <div class="grid g3">
+        <article class="card"><Image src={coin} alt="Pièce Idle Walk" width={72} height={72} /><h3>Des pièces</h3><p>La monnaie du jeu. Elle sert à acheter des bonus, débloquer des zones et acheter des œufs.</p></article>
+        <article class="card"><h3>Des bonus</h3><p>Permanents ou temporaires, ils augmentent le nombre de pièces par pas. Ton podomètre devient de plus en plus généreux.</p></article>
+        <article class="card"><h3>Des défis</h3><p>Marcher 1 000, 3 000, 6 000 pas… ou 30 000 pas sur la semaine : chaque objectif réclamé rapporte des pièces.</p></article>
+        <article class="card"><h3>Une série de jours</h3><p>À partir de 5 000 pas dans la journée, tu valides ta série. Des paliers de récompenses jalonnent les jours d'affilée.</p></article>
+        <article class="card"><h3>Un classement</h3><p>Compare-toi aux autres marcheurs avec un classement basé sur les pièces.</p></article>
+        <article class="card"><h3>Des zones</h3><p>Plus tu marches, plus vite tu atteins la zone suivante, avec ses ressources et ses bonus.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap duo2">
+      <div class="prose">
+        <h2>Podomètre classique ou podomètre ludique ?</h2>
+        <p>Un podomètre classique est parfait pour suivre un total. Mais un chiffre seul ne donne pas toujours envie d'en faire plus. Avec un podomètre ludique, chaque sortie ouvre des possibilités : un bonus à acheter, un œuf plus proche d'éclore, un boss à distancer.</p>
+        <p>Idle Walk ne cherche pas à remplacer un suivi sportif : c'est un jeu qui s'appuie sur tes pas. Il ne donne aucun conseil de santé et ne promet aucun résultat médical.</p>
+        <h3>Ce qu'Idle Walk n'est pas</h3>
+        <ul>
+          <li>Ce n'est pas un coach sportif ni un outil de perte de poids.</li>
+          <li>Il ne mesure ni calories, ni fréquence cardiaque.</li>
+          <li>Il n'est pas disponible sur iPhone pour l'instant : l'application est sur Android.</li>
+        </ul>
+      </div>
+      <div class="twoshots">
+        <div class="shot"><Image src={accueil} alt="Écran d'accueil du compteur de pas jeu Idle Walk" widths={[260, 400]} sizes="240px" /></div>
+        <div class="shot lower"><Image src={classement} alt="Classement des marcheurs dans l'application podomètre Idle Walk" widths={[260, 400]} sizes="240px" /></div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCta title="Essaie le podomètre qui te récompense" text="Télécharge Idle Walk gratuitement et vois ce que tes pas peuvent rapporter." place="podometre-final" />
+  <Related current="/podometre-ludique/" />
+</Base>
+<style>
+  .card img { margin-bottom: .5rem; }
+  .duo2 { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 860px) { .duo2 { grid-template-columns: 1.2fr .8fr; } }
+  .twoshots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; }
+  .lower { margin-top: 2rem; }
+</style>

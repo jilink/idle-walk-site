@@ -1,0 +1,15 @@
+---
+import PlayBadge from './PlayBadge.astro';
+import { PLAY_URL } from '../config';
+interface Props { place?: string; badge?: boolean; label?: string }
+const { place = 'page', badge = true, label = 'Télécharger gratuitement' } = Astro.props;
+---
+<div class="cta">
+  <a class="btn" href={PLAY_URL} rel="noopener" data-place={place}>
+    {label}
+  </a>
+  {badge && <PlayBadge width={170} place={place} />}
+</div>
+<style>
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; }
+</style>

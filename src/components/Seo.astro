@@ -1,0 +1,38 @@
+---
+import { SITE_NAME, PLAY_URL, GSC_VERIFICATION } from '../config';
+interface Props {
+  title: string;
+  description: string;
+  path: string; // ex. "/faq/"
+  jsonLd?: object[];
+  ogImage?: string;
+  noindex?: boolean;
+}
+const { title, description, path, jsonLd = [], ogImage = "/og-idle-walk.png", noindex = false } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const canonical = site + path;
+const image = site + ogImage;
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+{GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
+<meta name="theme-color" content="#8bcf82" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="500" />
+<meta property="og:image:alt" content="Idle Walk : la chaussure mascotte souriante sur fond vert" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+{jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}

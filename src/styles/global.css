@@ -1,0 +1,120 @@
+@import '@fontsource-variable/nunito/wght.css';
+
+:root {
+  --bg: #fbf7f0;
+  --card: #fffdf8;
+  --sunken: #f2ede3;
+  --warm: #f8ead2;
+  --mint: #deebdf;
+  --ink: #1c3b34;
+  --muted: #5d6a5c;
+  --brown: #4a281c;
+  --line: #e0d9cb;
+  --green: #8bcf82;
+  --green-deep: #3f6b52;
+  --green-mid: #6ba77f;
+  --yellow: #ffd86b;
+  --coral: #f26b5b;
+  --sky: #cfe9f2;
+  --r: 22px;
+  --edge: 0 5px 0 var(--brown);
+  --maxw: 1120px;
+  --gut: clamp(16px, 5vw, 32px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: 'Nunito Variable', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.0625rem; line-height: 1.65; font-weight: 500;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--green-deep); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+h1, h2, h3 { font-weight: 900; line-height: 1.12; letter-spacing: -0.01em; margin: 0 0 .5em; text-wrap: balance; }
+h1 { font-size: clamp(2.3rem, 7vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 4.6vw, 2.6rem); }
+h3 { font-size: 1.25rem; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+ul { padding-left: 1.2em; }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gut); }
+.narrow { max-width: 740px; }
+.section { padding-block: clamp(48px, 8vw, 96px); position: relative; }
+.eyebrow {
+  display: inline-block; font-weight: 900; font-size: .8rem; letter-spacing: .09em; text-transform: uppercase;
+  background: var(--yellow); color: var(--brown); border: 2px solid var(--brown); border-radius: 999px; padding: .15em .8em; margin-bottom: 1rem;
+  transform: rotate(-1.5deg);
+}
+.lead { font-size: 1.2rem; color: var(--muted); }
+.center { text-align: center; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Cartes « autocollant » : bord marqué + tranche 3D, comme les bannières du jeu */
+.card {
+  background: var(--card); border: 3px solid var(--brown); border-radius: var(--r); box-shadow: var(--edge); padding: 1.4rem;
+}
+.card h3 { margin-bottom: .35em; }
+.card p:last-child { margin-bottom: 0; }
+.grid { display: grid; gap: 1.4rem; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+
+/* Boutons */
+.btn {
+  display: inline-flex; align-items: center; gap: .5em; font: inherit; font-weight: 900; font-size: 1.1rem; text-decoration: none;
+  color: var(--brown); background: var(--yellow); border: 3px solid var(--brown); border-radius: 16px; padding: .7em 1.3em;
+  box-shadow: 0 5px 0 var(--brown); transition: transform .12s, box-shadow .12s;
+}
+.btn:hover { color: var(--brown); transform: translateY(2px); box-shadow: 0 3px 0 var(--brown); }
+.btn:active { transform: translateY(5px); box-shadow: 0 0 0 var(--brown); }
+.btn.small { font-size: .95rem; padding: .45em .95em; border-radius: 12px; box-shadow: 0 3px 0 var(--brown); }
+.btn.ghost { background: var(--card); }
+
+/* Bandes de fond */
+.band-green { background: var(--green); }
+.band-mint { background: var(--mint); }
+.band-warm { background: var(--warm); }
+.band-ink { background: var(--ink); color: var(--bg); }
+.band-ink .lead { color: #cfe0d3; }
+.wave-top::before, .wave-bottom::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 28px; background: inherit;
+  -webkit-mask: radial-gradient(circle at 14px 0, transparent 14px, #000 15px) 0 0 / 28px 28px repeat-x;
+  mask: radial-gradient(circle at 14px 0, transparent 14px, #000 15px) 0 0 / 28px 28px repeat-x;
+}
+.wave-top::before { top: -27px; transform: scaleY(-1); }
+
+/* Captures */
+.shot { border-radius: 26px; border: 3px solid var(--brown); box-shadow: 0 8px 0 var(--brown), 0 22px 30px rgba(74,40,28,.18); background: #8bb98a; overflow: hidden; }
+.shot img { width: 100%; height: auto; }
+
+/* Prose pages SEO */
+.prose { max-width: 740px; }
+.prose h2 { margin-top: 2.2em; }
+.prose h3 { margin-top: 1.6em; }
+.prose li { margin-bottom: .4em; }
+.callout { background: var(--warm); border: 3px solid var(--brown); border-radius: var(--r); padding: 1.1rem 1.3rem; margin: 1.6rem 0; }
+.callout p:last-child { margin: 0; }
+
+table.cmp { width: 100%; border-collapse: separate; border-spacing: 0; border: 3px solid var(--brown); border-radius: var(--r); overflow: hidden; background: var(--card); font-size: .98rem; }
+.cmp th, .cmp td { padding: .8rem 1rem; text-align: left; vertical-align: top; border-bottom: 2px solid var(--line); }
+.cmp thead th { background: var(--green); color: var(--ink); font-weight: 900; }
+.cmp tbody tr:last-child td { border-bottom: 0; }
+.cmp td:first-child { font-weight: 800; }
+.tablewrap { overflow-x: auto; }
+
+/* FAQ */
+details.faq { background: var(--card); border: 3px solid var(--brown); border-radius: 18px; box-shadow: 0 4px 0 var(--brown); margin-bottom: 1rem; }
+details.faq summary { cursor: pointer; list-style: none; padding: 1rem 3.2rem 1rem 1.2rem; font-weight: 900; font-size: 1.1rem; position: relative; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: '+'; position: absolute; right: 1rem; top: 50%; translate: 0 -50%; width: 2rem; height: 2rem; line-height: 1.7rem; text-align: center; background: var(--yellow); border: 2px solid var(--brown); border-radius: 50%; font-size: 1.3rem; }
+details.faq[open] summary::after { content: '–'; }
+details.faq .ans { padding: 0 1.2rem 1.1rem; }
+details.faq .ans p:last-child { margin: 0; }
+
+/* Animations douces */
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); } 50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); } }
+.bob { animation: bob 4.5s ease-in-out infinite; }

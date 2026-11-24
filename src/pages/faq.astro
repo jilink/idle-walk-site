@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Related from '../components/Related.astro';
+import { Image } from 'astro:assets';
+import { FAQ_ITEMS } from '../data/faq';
+import shoe from '../assets/brand/shoe.webp';
+import { SUPPORT_URL, CONTACT_EMAIL } from '../config';
+---
+<Base
+  title="FAQ Idle Walk : gratuit, pas, pièces, iOS, hors ligne"
+  description="Toutes les réponses sur Idle Walk : gratuité, compteur de pas, gain de pièces, zones, fonctionnement en arrière-plan, disponibilité iOS et connexion Internet."
+  path="/faq/"
+  crumbs={[{ name: 'FAQ', path: '/faq/' }]}
+>
+  <PageHead eyebrow="FAQ" title="Questions fréquentes sur Idle Walk" intro="Gratuité, compteur de pas, pièces, zones, iOS, connexion : les réponses, vérifiées dans l'application." place="faq">
+    <Image class="bob" src={shoe} alt="Chaussure mascotte d'Idle Walk" width={240} height={240} loading="eager" />
+  </PageHead>
+  <section class="section">
+    <div class="wrap narrow">
+      <Faq items={FAQ_ITEMS} />
+      <div class="callout">
+        <p><strong>Une autre question ?</strong> Consulte la <a href={SUPPORT_URL} rel="noopener">page d'assistance</a> ou écris-nous à <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+      </div>
+    </div>
+  </section>
+  <FinalCta place="faq-final" />
+  <Related current="/faq/" />
+</Base>

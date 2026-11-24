@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Related from '../components/Related.astro';
+import FinalCta from '../components/FinalCta.astro';
+import accueil from '../assets/shots/accueil.webp';
+import carte from '../assets/shots/carte.webp';
+import boss from '../assets/shots/boss.webp';
+import oeuf from '../assets/shots/oeuf.webp';
+---
+<Base
+  title="Jeu de marche sur Android : marche pour jouer | Idle Walk"
+  description="Qu'est-ce qu'un jeu de marche ? Idle Walk est une application jeu de marche gratuite : tes pas deviennent des pièces, des zones et des familiers. Marche pour jouer."
+  path="/jeu-de-marche/"
+  crumbs={[{ name: 'Jeu de marche', path: '/jeu-de-marche/' }]}
+>
+  <PageHead eyebrow="Jeu de marche" title="Un jeu de marche pour jouer en se promenant" intro="Idle Walk est une application jeu de marche pour Android : plus tu marches dans la vraie vie, plus ton aventure avance dans le jeu." place="jeu-de-marche">
+    <div class="shot"><Image src={accueil} alt="Idle Walk, jeu de marche : compteur de pièces et personnage qui avance" widths={[280, 420, 560]} sizes="280px" loading="eager" fetchpriority="high" /></div>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Qu'est-ce qu'un jeu de marche ?</h2>
+      <p>Un jeu de marche (ou jeu basé sur la marche) est un jeu mobile dont la progression dépend de tes déplacements réels. Au lieu de taper sur l'écran, tu marches : ton téléphone compte tes pas et le jeu les transforme en avancées, en ressources ou en récompenses.</p>
+      <p>L'idée est simple : ajouter une petite histoire, un objectif et un peu de collection à un geste que tu fais déjà tous les jours. Aller chercher du pain, promener le chien, rejoindre l'arrêt de bus : chaque trajet devient une occasion de faire progresser ton jeu.</p>
+
+      <h2>Comment Idle Walk transforme tes pas en progression</h2>
+      <p>Idle Walk est un jeu « idle » : il continue de progresser sans que tu aies besoin de jouer en continu. Voici la boucle de jeu, telle qu'elle existe dans l'application :</p>
+      <ol>
+        <li><strong>Tu marches.</strong> Le capteur de mouvement du téléphone et Health Connect comptent tes pas.</li>
+        <li><strong>Tes pas deviennent des pièces.</strong> Ton compteur de pièces monte, et l'écran d'accueil t'indique ton nombre de pièces par pas.</li>
+        <li><strong>Tu dépenses tes pièces.</strong> Bonus permanents ou temporaires, nouvelles zones, œufs à faire éclore.</li>
+        <li><strong>Tu avances plus vite.</strong> Chaque amélioration augmente les pièces gagnées à chaque pas, et la boucle repart.</li>
+      </ol>
+
+      <div class="callout"><p><strong>Un jeu, pas une contrainte.</strong> Il n'y a pas de session obligatoire : tu marches comme d'habitude, tu rouvres l'application quand tu veux, et un récapitulatif te montre ce que tes pas ont rapporté.</p></div>
+
+      <h2>Compteur de pas ou jeu de marche : quelle différence ?</h2>
+      <p>Un podomètre classique te donne un nombre. Un jeu de marche te donne une raison de continuer à avancer. Les deux peuvent se compléter, mais l'expérience n'est pas la même.</p>
+      <div class="tablewrap">
+        <table class="cmp">
+          <thead><tr><th></th><th>Simple compteur de pas</th><th>Jeu de marche comme Idle Walk</th></tr></thead>
+          <tbody>
+            <tr><td>Ce que tu obtiens</td><td>Un total de pas</td><td>Des pièces, des bonus, des zones, des œufs</td></tr>
+            <tr><td>Objectif</td><td>Un chiffre à atteindre</td><td>Un monde à débloquer, une collection à compléter</td></tr>
+            <tr><td>Ressenti</td><td>Utilitaire</td><td>Ludique, avec des paliers à franchir</td></tr>
+            <tr><td>Quand tu rouvres l'app</td><td>Tu lis ton score</td><td>Tu récoltes, tu améliores, tu choisis ton prochain objectif</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:1rem">Idle Walk garde d'ailleurs un vrai compteur de pas, avec l'historique par semaine et par mois : tu retrouves le côté « podomètre » avec, en plus, un jeu autour. Pour aller plus loin, lis notre page sur le <a href="/podometre-ludique/">podomètre ludique</a>.</p>
+
+      <h2>Ce que tu trouves dans Idle Walk</h2>
+      <h3>Sept zones à découvrir</h3>
+      <p>La Vallée verte est ta zone de départ. Avec tes pièces, tu débloques ensuite la Côte tropicale, la Forêt sucrée, l'Archipel céleste, la Banquise, le Récif englouti puis la Caldeira. Chaque zone a sa ressource, ses bonus et son ambiance.</p>
+      <h3>Des boss à distancer</h3>
+      <p>Pour passer à certaines zones, il faut affronter un boss : le zombie, le crabe, la sorcière… Le principe est une poursuite : tu dois garder de l'avance sur lui en marchant.</p>
+      <h3>Des œufs et des familiers</h3>
+      <p>Fais éclore des œufs en marchant et collectionne 16 familiers, communs ou rares. Équipé, un familier ajoute un bonus de pièces par pas. Les œufs et les familiers font partie du Premium, avec un essai gratuit proposé dans l'application.</p>
+      <h3>Un classement et des défis</h3>
+      <p>Des défis du jour et de la semaine, une série de jours de marche et un classement des marcheurs donnent un peu d'émulation, à ton rythme.</p>
+    </div>
+  </section>
+
+  <section class="section band-warm wave-top">
+    <div class="wrap">
+      <h2 class="center">En images</h2>
+      <div class="grid g3 s3">
+        <figure><div class="shot"><Image src={carte} alt="Carte des zones à débloquer dans le jeu de marche Idle Walk" widths={[300, 450]} sizes="300px" /></div><figcaption>La carte des zones</figcaption></figure>
+        <figure><div class="shot"><Image src={boss} alt="Combat de boss dans le jeu de marche Idle Walk" widths={[300, 450]} sizes="300px" /></div><figcaption>Un combat de boss</figcaption></figure>
+        <figure><div class="shot"><Image src={oeuf} alt="Œuf à faire éclore en marchant dans Idle Walk" widths={[300, 450]} sizes="300px" /></div><figcaption>Un œuf prêt à éclore</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Pourquoi marcher pour jouer rend les promenades plus motivantes</h2>
+      <p>Quand un trajet n'a pour but que d'arriver quelque part, il passe souvent inaperçu. Avec un jeu de marche, il gagne une petite couche d'intérêt : tu sais que tes pas serviront à acheter un bonus, ouvrir un œuf ou débloquer une zone.</p>
+      <ul>
+        <li><strong>Des objectifs courts :</strong> un défi du jour à terminer, un bonus à portée de pièces.</li>
+        <li><strong>Des récompenses visibles :</strong> le compteur grimpe, les paliers s'enchaînent.</li>
+        <li><strong>De la curiosité :</strong> quelle sera la prochaine zone ? Quel familier va sortir de l'œuf ?</li>
+      </ul>
+      <p>Pour en savoir plus sur cet aspect, lis la page <a href="/motivation-marche/">motivation marche</a>.</p>
+      <h2>Commencer en deux minutes</h2>
+      <p>Télécharge Idle Walk sur Google Play, choisis ton prénom et ton personnage, autorise l'accès aux pas, et fais tes premiers pas : le jeu te guide. Idle Walk est un jeu : il ne remplace pas un avis médical et ne promet aucun résultat sur la santé.</p>
+    </div>
+  </section>
+
+  <FinalCta place="jeu-de-marche-final" />
+  <Related current="/jeu-de-marche/" />
+</Base>
+<style>.s3 figure { margin: 0 auto; max-width: 300px; } .s3 figcaption { text-align: center; font-weight: 800; margin-top: 1rem; }</style>

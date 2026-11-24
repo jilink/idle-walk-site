@@ -1,0 +1,334 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import Faq from '../components/Faq.astro';
+import { ZONES, PETS, EGGS } from '../data/game';
+import { FAQ_ITEMS } from '../data/faq';
+import { PLAY_URL } from '../config';
+
+import accueil from '../assets/shots/accueil.webp';
+import oeuf from '../assets/shots/oeuf.webp';
+import classement from '../assets/shots/classement.webp';
+import familiers from '../assets/shots/familiers.webp';
+import activite from '../assets/shots/activite.webp';
+import boss from '../assets/shots/boss.webp';
+import maison from '../assets/shots/maison.webp';
+import carte from '../assets/shots/carte.webp';
+import shoe from '../assets/brand/shoe.webp';
+import coinBig from '../assets/brand/coin.webp';
+import star from '../assets/deco/star.webp';
+import cloud from '../assets/deco/cloud.webp';
+import clover from '../assets/deco/clover.webp';
+import mushroom from '../assets/deco/mushroom.webp';
+import bShoe from '../assets/bonus/shoe.webp';
+import bBoot from '../assets/bonus/icon-bonus-winged-boot.webp';
+import bFire from '../assets/bonus/icon-bonus-fireflies.webp';
+import bAcorn from '../assets/bonus/icon-bonus-acorn.webp';
+import bChest from '../assets/bonus/treasure-chest.webp';
+import av1 from '../assets/avatars/avatar-1.webp';
+import av2 from '../assets/avatars/avatar-2.webp';
+import av3 from '../assets/avatars/avatar-3.webp';
+import av4 from '../assets/avatars/avatar-4.webp';
+import av5 from '../assets/avatars/avatar-5.webp';
+import av6 from '../assets/avatars/avatar-6.webp';
+import bossVallee from '../assets/bosses/vallee-verte.webp';
+import bossCote from '../assets/bosses/cote-tropicale.webp';
+import bossBanquise from '../assets/bosses/banquise.webp';
+import bossRecif from '../assets/bosses/recif-englouti.webp';
+
+const site = Astro.site!.toString().replace(/\/$/, '');
+const app = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Idle Walk',
+  alternateName: 'Idle Walk – jeu de marche',
+  description: "Jeu de marche idle pour Android : tes pas se transforment en pièces, en bonus, en zones à débloquer et en familiers à collectionner.",
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'Android 8.0+',
+  inLanguage: 'fr',
+  url: site + '/',
+  downloadUrl: PLAY_URL,
+  installUrl: PLAY_URL,
+  image: site + '/icon-512.png',
+  screenshot: [accueil, oeuf, carte, activite].map((s) => site + '/shots/' + s.src.split('/').pop()),
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', availability: 'https://schema.org/InStock' },
+};
+// Les captures sont publiées dans /_astro ; on référence plutôt les URLs optimisées.
+app.screenshot = [accueil, oeuf, carte, activite].map((s) => site + s.src);
+
+const steps = [
+  { n: 1, t: 'Marche dans la vraie vie', d: "Mets ton téléphone en poche et vis ta journée. Le capteur de pas et Health Connect comptent pour toi, même application fermée.", img: shoe, alt: 'Chaussure mascotte d’Idle Walk en train de courir' },
+  { n: 2, t: 'Gagne des pièces grâce à tes pas', d: "Chaque pas se transforme en pièces. Ton compteur grimpe pendant que tu marches, et un récap t'attend à la réouverture.", img: coinBig, alt: 'Pièce dorée Idle Walk ornée d’une chaussure' },
+  { n: 3, t: 'Améliore ta progression', d: "Dépense tes pièces en bonus permanents ou temporaires pour gagner plus de pièces par pas.", img: bBoot, alt: 'Icône de bonus : bottes ailées' },
+  { n: 4, t: 'Débloque de nouveaux univers', d: "Sept zones à découvrir, de la Vallée verte à la Caldeira, chacune avec sa ressource et ses bonus.", img: clover, alt: 'Trèfle, ressource de la Vallée verte' },
+  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de 16 petits compagnons qui boostent tes pièces.", img: PETS[7].img, alt: 'Guimauve, un familier d’Idle Walk' },
+];
+---
+<Base
+  title="Idle Walk – Jeu de marche : transforme tes pas en aventure"
+  description="Idle Walk, le jeu de marche gratuit sur Android : tes pas deviennent des pièces, des zones à débloquer et des familiers à collectionner. Télécharge-le sur Google Play."
+  path="/"
+  jsonLd={[app]}
+>
+  <!-- HERO -->
+  <section class="hero band-green">
+    <div class="wrap heroin">
+      <div class="herotext">
+        <span class="eyebrow">Jeu de marche · Android</span>
+        <h1>Transforme tes pas en aventure !</h1>
+        <p class="lead sub">Idle Walk transforme tes promenades de tous les jours en progression dans un jeu idle : tu marches, tes pièces s'accumulent, ton monde grandit. Pas besoin de rester collé à l'écran.</p>
+        <Cta place="hero" />
+        <p class="mini">Gratuit sur Google Play · Jeu 100 % en français</p>
+      </div>
+      <div class="heroart" aria-hidden="false">
+        <div class="shot phone"><Image src={accueil} alt="Écran d'accueil d'Idle Walk : compteur de pièces, pas du jour et personnage qui marche dans la Vallée verte" widths={[360, 540, 720]} sizes="(min-width: 860px) 320px, 70vw" loading="eager" fetchpriority="high" /></div>
+        <Image class="deco d1 bob" src={star} alt="" width={90} height={90} loading="eager" />
+        <Image class="deco d2 bob" src={coinBig} alt="" width={96} height={96} loading="eager" />
+        <Image class="deco d3 bob" src={cloud} alt="" width={120} height={96} loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMEPLAY -->
+  <section class="section wave-top" id="gameplay">
+    <div class="wrap">
+      <div class="center narrow" style="margin-inline:auto">
+        <span class="eyebrow">Le gameplay</span>
+        <h2>Un jeu idle qui avance quand tu marches</h2>
+        <p class="lead">Ici, pas de bouton à marteler. Ton personnage avance dans le décor au rythme de tes vrais pas, récolte des ressources et fait grimper ton compteur de pièces.</p>
+      </div>
+      <div class="grid g3 shots3">
+        <figure><div class="shot"><Image src={accueil} alt="Compteur de pièces d'Idle Walk avec le nombre de pièces par pas et les pas du jour" widths={[320, 480, 720]} sizes="(min-width: 860px) 320px, 80vw" /></div><figcaption><strong>Gagne des pièces à chaque pas.</strong> Ton taux de pièces par pas s'affiche en direct.</figcaption></figure>
+        <figure><div class="shot"><Image src={boss} alt="Combat de boss dans Idle Walk : il faut garder de l'avance sur le zombie en marchant" widths={[320, 480, 720]} sizes="(min-width: 860px) 320px, 80vw" /></div><figcaption><strong>Échappe aux boss en marchant.</strong> Des poursuites te défient de garder de l'avance.</figcaption></figure>
+        <figure><div class="shot"><Image src={classement} alt="Classement des marcheurs dans Idle Walk avec le podium et la liste des joueurs" widths={[320, 480, 720]} sizes="(min-width: 860px) 320px, 80vw" /></div><figcaption><strong>Défie les autres marcheurs.</strong> Un classement pour te comparer en t'amusant.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT CA MARCHE -->
+  <section class="section band-mint wave-top" id="comment-ca-marche">
+    <div class="wrap">
+      <div class="center narrow" style="margin-inline:auto">
+        <span class="eyebrow">Comment ça marche</span>
+        <h2>5 étapes, un seul geste : marcher</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li class="card step">
+            <span class="num">{s.n}</span>
+            <Image src={s.img} alt={s.alt} width={84} height={84} />
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ZONES -->
+  <section class="section" id="zones">
+    <div class="wrap">
+      <div class="zonehead">
+        <div>
+          <span class="eyebrow">Les zones</span>
+          <h2>7 univers à débloquer</h2>
+          <p class="lead">De la Vallée verte à la Caldeira, chaque zone a son décor, sa ressource à récolter et ses bonus. Tu les débloques avec les pièces gagnées en marchant.</p>
+        </div>
+        <div class="shot mapshot"><Image src={carte} alt="Carte des zones d'Idle Walk : sept îles à débloquer, de la Vallée verte à la Caldeira" widths={[280, 420, 560]} sizes="(min-width: 860px) 280px, 70vw" /></div>
+      </div>
+      <ul class="grid g3 zones">
+        {ZONES.map((z) => (
+          <li class="card zone" style={`--tint:${z.tint}`}>
+            <div class="zimg"><Image src={z.img} alt={`Illustration de la zone ${z.name}`} widths={[280, 420, 560]} sizes="(min-width: 860px) 300px, 80vw" /></div>
+            <h3>{z.name}</h3>
+            <p class="zres">Ressource : <strong>{z.resource}</strong></p>
+            <p class="zbonus">{z.bonus}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAMILIERS & OEUFS -->
+  <section class="section band-warm wave-top" id="familiers">
+    <div class="wrap">
+      <div class="duo">
+        <div>
+          <span class="eyebrow">Œufs & familiers</span>
+          <h2>Fais éclore ta collection de compagnons</h2>
+          <p class="lead">Achète un œuf avec tes pièces, marche pour le faire éclore et découvre quel familier en sort. Équipe-en un : son bonus s'ajoute à tes pièces par pas.</p>
+          <ul class="ticks">
+            <li>10 œufs différents, du mousseux au stellaire</li>
+            <li>16 familiers à collectionner, communs et rares</li>
+            <li>Un familier actif à la fois, avec son bonus de pièces</li>
+            <li>Une Maison pour leur offrir un coin à décorer</li>
+          </ul>
+          <p class="note">Les œufs, les familiers et la Maison font partie du Premium d'Idle Walk (essai gratuit proposé dans l'application).</p>
+        </div>
+        <div class="twoshots">
+          <div class="shot"><Image src={oeuf} alt="Écran de l'œuf mousseux d'Idle Walk, prêt à éclore" widths={[260, 400, 540]} sizes="(min-width: 860px) 240px, 45vw" /></div>
+          <div class="shot lower"><Image src={familiers} alt="Éclosion d'un familier : Brume, un compagnon commun d'Idle Walk" widths={[260, 400, 540]} sizes="(min-width: 860px) 240px, 45vw" /></div>
+        </div>
+      </div>
+      <h3 class="center" style="margin-top:3rem">Quelques œufs</h3>
+      <ul class="eggs">
+        {EGGS.map((e) => <li><Image src={e.img} alt={`Œuf ${e.id} d'Idle Walk`} width={110} height={110} /></li>)}
+      </ul>
+      <h3 class="center" style="margin-top:2rem">Les 16 familiers</h3>
+      <ul class="pets">
+        {PETS.map((p) => <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROGRESSION -->
+  <section class="section" id="progression">
+    <div class="wrap">
+      <div class="center narrow" style="margin-inline:auto">
+        <span class="eyebrow">Améliorations & progression</span>
+        <h2>Toujours un nouveau palier à viser</h2>
+        <p class="lead">Ta progression ne s'arrête jamais vraiment : à chaque session, il y a un bonus à acheter, un défi à terminer ou une zone à atteindre.</p>
+      </div>
+      <div class="grid g2 prog">
+        <article class="card"><Image src={bBoot} alt="Bottes ailées, bonus d'Idle Walk" width={72} height={72} /><h3>Des bonus à acheter</h3><p>Permanents ou temporaires (« ×2 pièces par pas pendant 1 h »), les bonus font grimper ton nombre de pièces par pas. Plus tu avances, plus ils sont puissants.</p></article>
+        <article class="card"><Image src={bChest} alt="Coffre au trésor, récompense de défi" width={72} height={72} /><h3>Des défis jour et semaine</h3><p>Marcher 1 000 ou 3 000 pas, acheter des bonus, récolter des ressources : réclame les pièces de chaque défi terminé.</p></article>
+        <article class="card"><Image src={mushroom} alt="Champignon, ressource récoltée en marchant" width={72} height={72} /><h3>Des ressources à récolter</h3><p>En marchant, tu ramasses les ressources de ta zone (trèfles, coquillages, bonbons…) et tu consultes tes compteurs.</p></article>
+        <article class="card"><Image src={star} alt="Étoile de série de jours" width={72} height={72} /><h3>Une série de jours</h3><p>Atteins 5 000 pas par jour plusieurs jours d'affilée et réclame des paliers de récompenses : pièces, ressources, un œuf.</p></article>
+      </div>
+      <div class="bosses">
+        <Image src={bossVallee} alt="Le zombie, boss de la Vallée verte" width={88} height={102} />
+        <Image src={bossCote} alt="Le crabe, boss de la Côte tropicale" width={88} height={102} />
+        <Image src={bossBanquise} alt="Le pingouin, boss de la Banquise" width={88} height={102} />
+        <Image src={bossRecif} alt="Le requin, boss du Récif englouti" width={88} height={102} />
+        <p>Des combats de boss gardent l'accès aux zones : le zombie, le crabe, la sorcière, le pingouin, le requin… à toi de les distancer.</p>
+      </div>
+      <div class="chars">
+        <p><strong>Choisis ton personnage</strong> parmi 6 marcheurs à l'avatar mignon.</p>
+        <div>{[av1, av2, av3, av4, av5, av6].map((a, i) => <Image src={a} alt={`Personnage ${i + 1} à choisir dans Idle Walk`} width={72} height={69} />)}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODOMETRE -->
+  <section class="section band-ink wave-top" id="podometre">
+    <div class="wrap duo">
+      <div class="shot narrowshot"><Image src={activite} alt="Écran Activité d'Idle Walk : pas réels du jour et graphique de la semaine" widths={[280, 420, 560]} sizes="(min-width: 860px) 300px, 70vw" /></div>
+      <div>
+        <span class="eyebrow">Le podomètre</span>
+        <h2>Un vrai compteur de pas, avec un jeu autour</h2>
+        <p class="lead">Idle Walk lit les pas de ton téléphone Android et te montre ce que tu marches vraiment : pas du jour, semaine, mois, moyenne par jour.</p>
+        <ul class="ticks light">
+          <li>Capteur de mouvement et Health Connect, en lecture seule</li>
+          <li>Les pas marchés app fermée sont retrouvés à la réouverture</li>
+          <li>Historique par semaine et par mois dans l'écran Activité</li>
+          <li>Aucune limite sur ton compteur réel</li>
+        </ul>
+        <p><a class="btn ghost" href="/podometre-ludique/">Découvrir le podomètre ludique</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAISON -->
+  <section class="section" id="maison">
+    <div class="wrap duo rev">
+      <div>
+        <span class="eyebrow">Ta Maison</span>
+        <h2>Un petit coin à toi pour tes familiers</h2>
+        <p class="lead">Dans la Maison, tes familiers vivent dans un décor que tu personnalises : balançoire, tournesols, lanterne, fauteuil… Un joli bonus à regarder, entre deux promenades.</p>
+        <p><a href="/jeu-de-marche/">Comprendre le principe d'un jeu de marche →</a></p>
+      </div>
+      <div class="shot narrowshot"><Image src={maison} alt="La Maison d'Idle Walk : un jardin décoré où vivent les familiers" widths={[280, 420, 560]} sizes="(min-width: 860px) 300px, 70vw" /></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section band-mint wave-top" id="faq">
+    <div class="wrap narrow">
+      <div class="center">
+        <span class="eyebrow">FAQ</span>
+        <h2>Tes questions, nos réponses</h2>
+      </div>
+      <Faq items={FAQ_ITEMS.slice(0, 8)} />
+      <p class="center"><a href="/faq/">Voir toutes les questions →</a></p>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section finalcta band-green">
+    <div class="wrap center">
+      <Image class="bob" src={shoe} alt="Chaussure mascotte souriante d'Idle Walk" width={150} height={150} />
+      <h2>Prêt à partir à l'aventure ?</h2>
+      <p class="lead" style="color:var(--ink)">Télécharge Idle Walk gratuitement et fais de ta prochaine promenade le début d'une grande aventure.</p>
+      <div style="display:flex;justify-content:center"><Cta place="final" /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-block: clamp(32px, 6vw, 72px) clamp(56px, 8vw, 100px); overflow: hidden; }
+  .heroin { display: grid; gap: 2.5rem; align-items: center; }
+  .hero h1 { color: var(--ink); text-shadow: 0 3px 0 #ffffff80; }
+  .hero .sub { color: #1c3b34; margin-block: 1rem 1.6rem; max-width: 34em; }
+  .mini { margin: 1rem 0 0; font-weight: 800; font-size: .95rem; color: #1c3b34; }
+  .heroart { position: relative; justify-self: center; width: min(320px, 78vw); }
+  .phone { transform: rotate(3deg); }
+  .deco { position: absolute; width: auto; filter: drop-shadow(0 4px 0 rgba(74,40,28,.35)); }
+  .d1 { top: -18px; right: -30px; width: 84px; --rot: 12deg; }
+  .d2 { bottom: 40px; left: -44px; width: 88px; --rot: -10deg; animation-delay: -1.5s; }
+  .d3 { top: 30%; left: -64px; width: 110px; animation-delay: -3s; }
+  @media (min-width: 860px) { .heroin { grid-template-columns: 1.15fr .85fr; } .heroart { width: 320px; } }
+
+  .shots3 { margin-top: 2.5rem; }
+  .shots3 figure { margin: 0; max-width: 320px; margin-inline: auto; }
+  .shots3 figcaption { margin-top: 1.1rem; font-size: 1rem; text-align: center; }
+
+  .steps { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+  .step { position: relative; padding-top: 2.4rem; }
+  .step img { margin-bottom: .6rem; width: 84px; height: 84px; object-fit: contain; }
+  .num { position: absolute; top: -18px; left: 16px; width: 40px; height: 40px; display: grid; place-items: center; background: var(--coral); color: #fff; font-weight: 900; font-size: 1.3rem; border: 3px solid var(--brown); border-radius: 50%; }
+
+  .zonehead { display: grid; gap: 2rem; align-items: center; margin-bottom: 2.5rem; }
+  .mapshot { width: min(280px, 70vw); justify-self: center; transform: rotate(-2deg); }
+  @media (min-width: 860px) { .zonehead { grid-template-columns: 1fr auto; } }
+  .zones { list-style: none; padding: 0; margin: 0; grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .zones { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .zones { grid-template-columns: repeat(3, 1fr); } }
+  .zone:last-child { grid-column: 1 / -1; width: min(100%, 380px); justify-self: center; }
+  @media (max-width: 559px) { .zone:last-child { width: 100%; } }
+  .zone { background: var(--tint); padding: 1rem 1rem 1.3rem; }
+  .zimg { background: var(--tint); border-radius: 14px; margin-bottom: .6rem; overflow: hidden; }
+  .zone img { width: 100%; height: auto; }
+  .zres { margin: 0 0 .3em; color: var(--muted); }
+  .zbonus { margin: 0; font-weight: 700; font-size: .98rem; }
+
+  .duo { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 860px) { .duo { grid-template-columns: 1fr 1fr; } .duo.rev > :first-child { order: 0; } }
+  .twoshots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; justify-self: center; }
+  .lower { margin-top: 2rem; }
+  .narrowshot { width: min(300px, 76vw); justify-self: center; }
+  .ticks { list-style: none; padding: 0; margin: 1.2rem 0; display: grid; gap: .5rem; }
+  .ticks li { padding-left: 2rem; position: relative; font-weight: 700; }
+  .ticks li::before { content: '✓'; position: absolute; left: 0; top: 0; width: 1.4rem; height: 1.4rem; line-height: 1.2rem; text-align: center; background: var(--green); border: 2px solid var(--brown); border-radius: 50%; color: var(--brown); font-weight: 900; font-size: .85rem; }
+  .note { background: var(--card); border: 2px dashed var(--brown); border-radius: 14px; padding: .7rem 1rem; font-size: .95rem; }
+  .eggs, .pets { list-style: none; padding: 0; margin: 1.2rem 0 0; display: flex; flex-wrap: wrap; gap: .8rem 1rem; justify-content: center; }
+  .eggs img { width: 84px; height: 84px; object-fit: contain; }
+  .pets li { display: grid; justify-items: center; font-weight: 800; font-size: .85rem; width: 92px; }
+  .pets img { width: 80px; height: 80px; object-fit: contain; }
+
+  .prog { margin-top: 2.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .prog { grid-template-columns: repeat(2, 1fr); } }
+  .prog .card img { margin-bottom: .6rem; width: 72px; height: 72px; object-fit: contain; }
+  .bosses { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; justify-content: center; margin-top: 2.5rem; background: var(--sky); border: 3px solid var(--brown); border-radius: var(--r); padding: 1.2rem; }
+  .bosses img { width: 72px; height: auto; }
+  .bosses p { flex: 1 1 260px; margin: 0; font-weight: 700; }
+  .chars { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.6rem; }
+  .chars p { margin: 0; }
+  .chars div { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+  .chars img { width: 60px; height: auto; }
+
+  .ticks.light li { color: #eef5ef; }
+  .finalcta { padding-block: clamp(56px, 9vw, 110px); }
+  .finalcta h2 { margin-top: .5rem; }
+  .finalcta img { margin-inline: auto; }
+</style>

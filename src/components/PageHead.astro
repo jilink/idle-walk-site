@@ -1,0 +1,28 @@
+---
+import Cta from './Cta.astro';
+interface Props { eyebrow: string; title: string; intro: string; place: string }
+const { eyebrow, title, intro, place } = Astro.props;
+---
+<section class="phead band-green">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <span>{eyebrow}</span></nav>
+    <div class="pin">
+      <div class="ptext">
+        <h1>{title}</h1>
+        <p class="lead">{intro}</p>
+        <Cta place={place} />
+      </div>
+      <div class="pside"><slot /></div>
+    </div>
+  </div>
+</section>
+<style>
+  .phead { padding-block: 1.2rem clamp(48px, 7vw, 88px); }
+  .crumbs { font-weight: 800; font-size: .9rem; margin-bottom: 1.4rem; }
+  .crumbs a { color: var(--ink); }
+  .pin { display: grid; gap: 2rem; align-items: center; }
+  h1 { font-size: clamp(2rem, 6vw, 3.4rem); text-shadow: 0 3px 0 #ffffff80; }
+  .lead { color: var(--ink); margin-bottom: 1.6rem; }
+  .pside { justify-self: center; width: min(280px, 70vw); }
+  @media (min-width: 860px) { .pin { grid-template-columns: 1.3fr .7fr; } }
+</style>

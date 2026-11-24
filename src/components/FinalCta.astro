@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import Cta from './Cta.astro';
+import shoe from '../assets/brand/shoe.webp';
+interface Props { title?: string; text?: string; place?: string }
+const { title = 'Prêt à faire marcher ton aventure ?', text = 'Idle Walk est gratuit sur Google Play. Télécharge-le et lance-toi pour tes premiers pas.', place = 'final' } = Astro.props;
+---
+<section class="section band-green fin wave-top">
+  <div class="wrap center">
+    <Image class="bob" src={shoe} alt="Chaussure mascotte souriante d'Idle Walk" width={120} height={120} />
+    <h2>{title}</h2>
+    <p class="lead" style="color:var(--ink)">{text}</p>
+    <div style="display:flex;justify-content:center"><Cta place={place} /></div>
+  </div>
+</section>
+<style>.fin img { margin-inline: auto; }</style>

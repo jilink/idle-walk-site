@@ -1,0 +1,14 @@
+---
+import { Image } from 'astro:assets';
+import badge from '../assets/brand/google-play-badge-fr.png';
+import { PLAY_URL } from '../config';
+interface Props { width?: number; priority?: boolean; place?: string }
+const { width = 200, priority = false, place = 'page' } = Astro.props;
+---
+<a href={PLAY_URL} class="playbadge" rel="noopener" data-place={place} aria-label="Télécharger Idle Walk gratuitement sur Google Play">
+  <Image src={badge} alt="Disponible sur Google Play" width={width} height={Math.round(width * 250 / 646)} loading={priority ? 'eager' : 'lazy'} widths={[width, width * 2]} />
+</a>
+<style>
+  .playbadge { display: inline-block; line-height: 0; transition: transform .12s; }
+  .playbadge:hover { transform: translateY(-2px) rotate(-1deg); }
+</style>

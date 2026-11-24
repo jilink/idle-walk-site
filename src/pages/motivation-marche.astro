@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Related from '../components/Related.astro';
+import FinalCta from '../components/FinalCta.astro';
+import carte from '../assets/shots/carte.webp';
+import oeuf from '../assets/shots/oeuf.webp';
+import familiers from '../assets/shots/familiers.webp';
+import star from '../assets/deco/star.webp';
+import chest from '../assets/bonus/treasure-chest.webp';
+import scroll from '../assets/bonus/map-scroll.webp';
+import clover from '../assets/deco/clover.webp';
+---
+<Base
+  title="Motivation marche : rends tes promenades amusantes | Idle Walk"
+  description="Besoin de motivation pour marcher ? Idle Walk est une application pour marcher davantage en s'amusant : progression, récompenses, objectifs et nouveaux univers à débloquer."
+  path="/motivation-marche/"
+  crumbs={[{ name: 'Motivation marche', path: '/motivation-marche/' }]}
+>
+  <PageHead eyebrow="Motivation marche" title="Marcher plus souvent, parce que c'est amusant" intro="Idle Walk transforme une habitude du quotidien en petite aventure : des objectifs, des récompenses et de nouveaux contenus à débloquer, pas après pas." place="motivation">
+    <div class="shot"><Image src={carte} alt="Carte des zones à débloquer dans Idle Walk, application pour marcher davantage" widths={[280, 420, 560]} sizes="280px" loading="eager" fetchpriority="high" /></div>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Pourquoi la motivation à marcher est si fragile</h2>
+      <p>Marcher est simple, mais l'habitude est fragile : on oublie, il pleut, la journée est longue. Le plus souvent, ce n'est pas la marche elle-même qui manque, c'est une petite raison de se lever et d'y aller.</p>
+      <p>Les jeux ont une longueur d'avance sur ce point : ils savent donner envie de revenir. Une application pour marcher davantage peut emprunter ces ressorts pour rendre la marche plus agréable, sans en faire une corvée.</p>
+
+      <h2>Comment Idle Walk rend la marche amusante</h2>
+    </div>
+    <div class="wrap">
+      <div class="grid g2 ms">
+        <article class="card"><Image src={star} alt="Étoile : progression" width={72} height={72} /><h3>La progression</h3><p>Chaque pas fait monter ton compteur de pièces. Tu vois ta progression bouger, même sur une courte promenade, et chaque session te rapproche de la suivante.</p></article>
+        <article class="card"><Image src={chest} alt="Coffre au trésor : récompenses" width={72} height={72} /><h3>Les récompenses</h3><p>Bonus à acheter, ressources à récolter, séries de jours à valider : il y a presque toujours quelque chose à gagner en rouvrant l'application.</p></article>
+        <article class="card"><Image src={scroll} alt="Carte au trésor : objectifs" width={72} height={72} /><h3>Les objectifs</h3><p>Des défis du jour et de la semaine donnent un cap clair : un nombre de pas, un bonus, une zone à débloquer.</p></article>
+        <article class="card"><Image src={clover} alt="Trèfle : nouveaux contenus" width={72} height={72} /><h3>Le plaisir de débloquer</h3><p>Sept zones, des boss, 10 œufs et 16 familiers : une raison de marcher un peu plus pour voir ce qui vient ensuite.</p></article>
+      </div>
+    </div>
+    <div class="wrap prose">
+      <h2>Une petite aventure à chaque promenade</h2>
+      <p>Imagine : tu pars faire une course de dix minutes. Au retour, tu rouvres Idle Walk : un récapitulatif t'indique les pièces gagnées, ton œuf a avancé, tu peux enfin t'offrir le bonus que tu visais. Ta course est devenue un petit épisode de ton aventure.</p>
+      <p>Cette sensation de « j'ai avancé » est exactement ce qui aide à ancrer une habitude. Pas de pression : le jeu se joue à ton rythme.</p>
+
+      <h2>Des idées pour garder le rythme</h2>
+      <ul>
+        <li><strong>Viser une petite série :</strong> valider 5 000 pas dans la journée fait avancer ta série de jours.</li>
+        <li><strong>Choisir un défi du jour :</strong> 1 000 pas pour commencer, 3 000 pour viser plus haut.</li>
+        <li><strong>Fixer un objectif de zone :</strong> décide de la prochaine zone à atteindre et marche vers elle.</li>
+        <li><strong>Marcher avec un œuf en cours :</strong> regarde-le avancer, c'est un bon prétexte pour une pause marche.</li>
+      </ul>
+      <div class="callout"><p><strong>À savoir :</strong> Idle Walk est un jeu. Il ne fait aucune promesse de santé, de forme ou de perte de poids, et ne remplace pas l'avis d'un professionnel. Marche à ton rythme et selon tes capacités.</p></div>
+    </div>
+  </section>
+
+  <section class="section band-warm wave-top">
+    <div class="wrap duo">
+      <div class="prose">
+        <h2>Des compagnons qui récompensent la persévérance</h2>
+        <p>En marchant, tu fais éclore des œufs et tu rencontres des familiers : Brume, Guimauve, Tison, Lueur… Chacun ajoute un petit bonus à tes pièces. Un œuf à finir, un nouveau compagnon à découvrir : voilà des raisons très concrètes de sortir marcher.</p>
+        <p>Les œufs et les familiers font partie du Premium, proposé avec un essai gratuit dans l'application.</p>
+      </div>
+      <div class="twoshots">
+        <div class="shot"><Image src={oeuf} alt="Un œuf Idle Walk à faire éclore en marchant" widths={[260, 400]} sizes="240px" /></div>
+        <div class="shot lower"><Image src={familiers} alt="Un familier fraîchement éclos dans Idle Walk" widths={[260, 400]} sizes="240px" /></div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCta title="Donne une raison de plus à tes promenades" text="Télécharge Idle Walk gratuitement et vois jusqu'où tes pas peuvent t'emmener." place="motivation-final" />
+  <Related current="/motivation-marche/" />
+</Base>
+<style>
+  .ms { margin-block: 1.5rem 2rem; }
+  .ms .card img { margin-bottom: .6rem; width: 72px; height: 72px; object-fit: contain; }
+  .duo { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 860px) { .duo { grid-template-columns: 1.2fr .8fr; } }
+  .twoshots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; }
+  .lower { margin-top: 2rem; }
+</style>
