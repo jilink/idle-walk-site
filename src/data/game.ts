@@ -19,7 +19,7 @@ export const ZONES = [
 
 // Anti-spoil : seules les 2 premières zones sont détaillées sur le site, les autres sont floutées.
 export const ZONES_REVEALED = 2;
-export const PETS_REVEALED = 3;
+export const PETS_REVEALED_IDS = ['brume', 'guimauve', 'chance'];
 const lockedZoneImgs = import.meta.glob('../assets/locked/zones/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
 export const lockedZoneImg = (id: string) => lockedZoneImgs[`../assets/locked/zones/${id}.webp`];
 const lockedPetImgs = import.meta.glob('../assets/locked/familiers/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
@@ -27,7 +27,7 @@ export const lockedPetImg = (id: string) => lockedPetImgs[`../assets/locked/fami
 
 const pets = ['bourgeon', 'brume', 'chance', 'eclat', 'embrun', 'foudre', 'goutte', 'guimauve', 'lierre', 'lueur', 'mousseline', 'nacre', 'pollen', 'racine', 'silex', 'tison'] as const;
 const petImgs = import.meta.glob('../assets/familiers/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
-export const PETS = pets.map((id) => ({
+const petsAll = pets.map((id) => ({
   id,
   name: id.charAt(0).toUpperCase() + id.slice(1),
   img: petImgs[`../assets/familiers/${id}.webp`],
@@ -36,3 +36,8 @@ export const PETS = pets.map((id) => ({
 const eggIds = ['mousseux', 'brindille', 'silex', 'sable', 'corail', 'perle', 'brume', 'tonnerre', 'lave', 'stellaire'] as const;
 const eggImgs = import.meta.glob('../assets/oeufs/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
 export const EGGS = eggIds.map((id) => ({ id, img: eggImgs[`../assets/oeufs/${id}.webp`] }));
+
+// Familiers montrés d'abord (dans l'ordre), puis les autres (cachés).
+export const PETS_SHOWN = PETS_REVEALED_IDS.map((id) => petsAll.find((p) => p.id === id)!);
+export const PETS_HIDDEN = petsAll.filter((p) => !PETS_REVEALED_IDS.includes(p.id));
+export const PETS = [...PETS_SHOWN, ...PETS_HIDDEN];

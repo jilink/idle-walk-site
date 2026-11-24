@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
 import Faq from '../components/Faq.astro';
-import { ZONES, PETS, EGGS, ZONES_REVEALED, PETS_REVEALED, lockedZoneImg, lockedPetImg } from '../data/game';
+import { ZONES, PETS, EGGS, ZONES_REVEALED, PETS_SHOWN, PETS_HIDDEN, lockedZoneImg, lockedPetImg } from '../data/game';
 import { FAQ_ITEMS } from '../data/faq';
 import { PLAY_URL } from '../config';
 
@@ -59,7 +59,7 @@ const steps = [
   { n: 2, t: 'Gagne des pièces grâce à tes pas', d: "Chaque pas se transforme en pièces. Ton compteur grimpe pendant que tu marches, et un récap t'attend à la réouverture.", img: coinBig, alt: 'Pièce dorée Idle Walk ornée d’une chaussure' },
   { n: 3, t: 'Améliore ta progression', d: "Dépense tes pièces en bonus permanents ou temporaires pour gagner plus de pièces par pas.", img: bBoot, alt: 'Icône de bonus : bottes ailées' },
   { n: 4, t: 'Débloque de nouveaux univers', d: "Sept zones à découvrir, chacune avec sa ressource et ses bonus.", img: clover, alt: 'Trèfle, ressource de la Vallée verte' },
-  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de petits compagnons qui boostent tes pièces.", img: PETS[1].img, alt: 'Brume, un familier d’Idle Walk' },
+  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de petits compagnons qui boostent tes pièces.", img: PETS[0].img, alt: 'Brume, un familier d’Idle Walk' },
 ];
 ---
 <Base
@@ -180,9 +180,8 @@ const steps = [
       </ul>
       <h3 class="center" style="margin-top:2rem">Quelques familiers (à toi de découvrir les autres !)</h3>
       <ul class="pets">
-        {PETS.slice(0, PETS_REVEALED + 4).map((p, i) => i < PETS_REVEALED
-          ? <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>
-          : <li class="lockedpet"><Image src={lockedPetImg(p.id)} alt="Familier mystère" width={80} height={80} /><span>???</span></li>)}
+        {PETS_SHOWN.map((p) => <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>)}
+        {PETS_HIDDEN.slice(0, 4).map((p) => <li class="lockedpet"><Image src={lockedPetImg(p.id)} alt="Familier mystère" width={80} height={80} /><span>???</span></li>)}
       </ul>
     </div>
   </section>
