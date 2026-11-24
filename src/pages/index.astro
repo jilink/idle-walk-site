@@ -59,7 +59,7 @@ const steps = [
   { n: 2, t: 'Gagne des pièces grâce à tes pas', d: "Chaque pas se transforme en pièces. Ton compteur grimpe pendant que tu marches, et un récap t'attend à la réouverture.", img: coinBig, alt: 'Pièce dorée Idle Walk ornée d’une chaussure' },
   { n: 3, t: 'Améliore ta progression', d: "Dépense tes pièces en bonus permanents ou temporaires pour gagner plus de pièces par pas.", img: bBoot, alt: 'Icône de bonus : bottes ailées' },
   { n: 4, t: 'Débloque de nouveaux univers', d: "Sept zones à découvrir, chacune avec sa ressource et ses bonus.", img: clover, alt: 'Trèfle, ressource de la Vallée verte' },
-  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de 16 petits compagnons qui boostent tes pièces.", img: PETS[1].img, alt: 'Brume, un familier d’Idle Walk' },
+  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de petits compagnons qui boostent tes pièces.", img: PETS[1].img, alt: 'Brume, un familier d’Idle Walk' },
 ];
 ---
 <Base
@@ -162,8 +162,8 @@ const steps = [
           <h2>Fais éclore ta collection de compagnons</h2>
           <p class="lead">Achète un œuf avec tes pièces, marche pour le faire éclore et découvre quel familier en sort. Équipe-en un : son bonus s'ajoute à tes pièces par pas.</p>
           <ul class="ticks">
-            <li>10 œufs différents, du mousseux au stellaire</li>
-            <li>16 familiers à collectionner, communs et rares</li>
+            <li>Des œufs différents à faire éclore, de plus en plus rares</li>
+            <li>Des familiers à collectionner, communs et rares</li>
             <li>Un familier actif à la fois, avec son bonus de pièces</li>
             <li>Une Maison pour leur offrir un coin à décorer</li>
           </ul>
@@ -176,11 +176,11 @@ const steps = [
       </div>
       <h3 class="center" style="margin-top:3rem">Quelques œufs</h3>
       <ul class="eggs">
-        {EGGS.map((e) => <li><Image src={e.img} alt={`Œuf ${e.id} d'Idle Walk`} width={110} height={110} /></li>)}
+        {EGGS.slice(0, 6).map((e) => <li><Image src={e.img} alt={`Œuf ${e.id} d'Idle Walk`} width={110} height={110} /></li>)}
       </ul>
-      <h3 class="center" style="margin-top:2rem">Les 16 familiers (à toi de découvrir les autres !)</h3>
+      <h3 class="center" style="margin-top:2rem">Quelques familiers (à toi de découvrir les autres !)</h3>
       <ul class="pets">
-        {PETS.map((p, i) => i < PETS_REVEALED
+        {PETS.slice(0, PETS_REVEALED + 4).map((p, i) => i < PETS_REVEALED
           ? <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>
           : <li class="lockedpet"><Image src={lockedPetImg(p.id)} alt="Familier mystère" width={80} height={80} /><span>???</span></li>)}
       </ul>

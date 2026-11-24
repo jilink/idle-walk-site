@@ -19,7 +19,7 @@ Astro 5 statique, aucun JS client (menu burger = `<details>`, FAQ = `<details>`)
 - Ne décrire que des fonctionnalités **réellement présentes** dans l'app (vérifier dans `../idle-walk/src`). Ne rien inventer : ni avis, ni notes, ni stats de téléchargements, ni récompenses.
 - Gratuit : conversion pas→pièces plafonnée à 1 500 pas/jour. Premium (essai gratuit proposé) : œufs, familiers, Maison, fin du plafond. Disponible sur Android uniquement (pas iOS).
 - Aucune promesse médicale ou de perte de poids (c'est un jeu).
-- **Anti-spoil** : seules les 2 premières zones (`ZONES_REVEALED`) et les 3 premiers familiers (`PETS_REVEALED`) sont montrés ; les autres sont floutés/en ombre via des images pré-floutées (`scripts/make-locked.mjs`). Ne pas citer dans les textes les noms des autres zones, boss, bonus ou familiers. Les œufs peuvent être montrés.
+- **Anti-spoil** : seules les 2 premières zones (`ZONES_REVEALED`) et les 3 premiers familiers (`PETS_REVEALED`) sont montrés ; les autres sont floutés/en ombre via des images pré-floutées (`scripts/make-locked.mjs`). Ne pas citer dans les textes les noms des autres zones, boss, bonus ou familiers. Les œufs peuvent être montrés. **Ne jamais indiquer le nombre d'œufs ni de familiers** (il va augmenter) ; la liste affichée est volontairement tronquée.
 - Un seul H1 par page, title et description uniques, lien Google Play sur chaque page (badge officiel + bouton).
 - Pas d'e-mail ni d'adresse perso sur le site. Les liens légaux/assistance sont des pages Notion.
 
