@@ -17,6 +17,14 @@ export const ZONES = [
   { id: 'caldeira', name: 'Caldeira', img: caldeira, resource: 'Braises', bonus: 'Chaleur ardente : +20 % de pièces en soirée', tint: '#DDCFCD' },
 ] as const;
 
+// Anti-spoil : seules les 2 premières zones sont détaillées sur le site, les autres sont floutées.
+export const ZONES_REVEALED = 2;
+export const PETS_REVEALED = 3;
+const lockedZoneImgs = import.meta.glob('../assets/locked/zones/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+export const lockedZoneImg = (id: string) => lockedZoneImgs[`../assets/locked/zones/${id}.webp`];
+const lockedPetImgs = import.meta.glob('../assets/locked/familiers/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
+export const lockedPetImg = (id: string) => lockedPetImgs[`../assets/locked/familiers/${id}.webp`];
+
 const pets = ['bourgeon', 'brume', 'chance', 'eclat', 'embrun', 'foudre', 'goutte', 'guimauve', 'lierre', 'lueur', 'mousseline', 'nacre', 'pollen', 'racine', 'silex', 'tison'] as const;
 const petImgs = import.meta.glob('../assets/familiers/*.webp', { eager: true, import: 'default' }) as Record<string, ImageMetadata>;
 export const PETS = pets.map((id) => ({

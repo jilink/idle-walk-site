@@ -20,7 +20,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: 'Comment débloquer de nouveaux univers ?',
-    a: "<p>Idle Walk compte 7 zones, de la Vallée verte à la Caldeira. Tu débloques chaque nouvelle zone avec les pièces gagnées en marchant, directement depuis la carte des zones. Dans certaines zones, un boss garde l'accès : il faut le distancer en marchant, sans se faire rattraper.</p>",
+    a: "<p>Idle Walk compte 7 zones, à partir de la Vallée verte. Tu débloques chaque nouvelle zone avec les pièces gagnées en marchant, directement depuis la carte des zones. Dans certaines zones, un boss garde l'accès : il faut le distancer en marchant, sans se faire rattraper.</p>",
   },
   {
     q: "L'application fonctionne-t-elle en arrière-plan ?",

@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
 import Faq from '../components/Faq.astro';
-import { ZONES, PETS, EGGS } from '../data/game';
+import { ZONES, PETS, EGGS, ZONES_REVEALED, PETS_REVEALED, lockedZoneImg, lockedPetImg } from '../data/game';
 import { FAQ_ITEMS } from '../data/faq';
 import { PLAY_URL } from '../config';
 
@@ -33,9 +33,6 @@ import av4 from '../assets/avatars/avatar-4.webp';
 import av5 from '../assets/avatars/avatar-5.webp';
 import av6 from '../assets/avatars/avatar-6.webp';
 import bossVallee from '../assets/bosses/vallee-verte.webp';
-import bossCote from '../assets/bosses/cote-tropicale.webp';
-import bossBanquise from '../assets/bosses/banquise.webp';
-import bossRecif from '../assets/bosses/recif-englouti.webp';
 
 const site = Astro.site!.toString().replace(/\/$/, '');
 const app = {
@@ -61,8 +58,8 @@ const steps = [
   { n: 1, t: 'Marche dans la vraie vie', d: "Mets ton téléphone en poche et vis ta journée. Le capteur de pas et Health Connect comptent pour toi, même application fermée.", img: shoe, alt: 'Chaussure mascotte d’Idle Walk en train de courir' },
   { n: 2, t: 'Gagne des pièces grâce à tes pas', d: "Chaque pas se transforme en pièces. Ton compteur grimpe pendant que tu marches, et un récap t'attend à la réouverture.", img: coinBig, alt: 'Pièce dorée Idle Walk ornée d’une chaussure' },
   { n: 3, t: 'Améliore ta progression', d: "Dépense tes pièces en bonus permanents ou temporaires pour gagner plus de pièces par pas.", img: bBoot, alt: 'Icône de bonus : bottes ailées' },
-  { n: 4, t: 'Débloque de nouveaux univers', d: "Sept zones à découvrir, de la Vallée verte à la Caldeira, chacune avec sa ressource et ses bonus.", img: clover, alt: 'Trèfle, ressource de la Vallée verte' },
-  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de 16 petits compagnons qui boostent tes pièces.", img: PETS[7].img, alt: 'Guimauve, un familier d’Idle Walk' },
+  { n: 4, t: 'Débloque de nouveaux univers', d: "Sept zones à découvrir, chacune avec sa ressource et ses bonus.", img: clover, alt: 'Trèfle, ressource de la Vallée verte' },
+  { n: 5, t: 'Collectionne des familiers', d: "Fais éclore des œufs en marchant et réunis une collection de 16 petits compagnons qui boostent tes pièces.", img: PETS[1].img, alt: 'Brume, un familier d’Idle Walk' },
 ];
 ---
 <Base
@@ -133,17 +130,23 @@ const steps = [
         <div>
           <span class="eyebrow">Les zones</span>
           <h2>7 univers à débloquer</h2>
-          <p class="lead">De la Vallée verte à la Caldeira, chaque zone a son décor, sa ressource à récolter et ses bonus. Tu les débloques avec les pièces gagnées en marchant.</p>
+          <p class="lead">Chaque zone a son décor, sa ressource à récolter et ses bonus. Tu les débloques avec les pièces gagnées en marchant. On ne te dévoile que les deux premières : le reste est une surprise.</p>
         </div>
-        <div class="shot mapshot"><Image src={carte} alt="Carte des zones d'Idle Walk : sept îles à débloquer, de la Vallée verte à la Caldeira" widths={[280, 420, 560]} sizes="(min-width: 860px) 280px, 70vw" /></div>
+        <div class="shot mapshot"><Image src={carte} alt="Carte des zones d'Idle Walk : sept îles à débloquer" widths={[280, 420, 560]} sizes="(min-width: 860px) 280px, 70vw" /></div>
       </div>
       <ul class="grid g3 zones">
-        {ZONES.map((z) => (
+        {ZONES.map((z, i) => i < ZONES_REVEALED ? (
           <li class="card zone" style={`--tint:${z.tint}`}>
             <div class="zimg"><Image src={z.img} alt={`Illustration de la zone ${z.name}`} widths={[280, 420, 560]} sizes="(min-width: 860px) 300px, 80vw" /></div>
             <h3>{z.name}</h3>
             <p class="zres">Ressource : <strong>{z.resource}</strong></p>
             <p class="zbonus">{z.bonus}</p>
+          </li>
+        ) : (
+          <li class="card zone locked" style={`--tint:${z.tint}`}>
+            <div class="zimg"><Image src={lockedZoneImg(z.id)} alt="Zone mystérieuse à découvrir dans le jeu" width={280} height={160} /></div>
+            <h3>Zone secrète</h3>
+            <p class="zres">À découvrir en jouant…</p>
           </li>
         ))}
       </ul>
@@ -175,9 +178,11 @@ const steps = [
       <ul class="eggs">
         {EGGS.map((e) => <li><Image src={e.img} alt={`Œuf ${e.id} d'Idle Walk`} width={110} height={110} /></li>)}
       </ul>
-      <h3 class="center" style="margin-top:2rem">Les 16 familiers</h3>
+      <h3 class="center" style="margin-top:2rem">Les 16 familiers (à toi de découvrir les autres !)</h3>
       <ul class="pets">
-        {PETS.map((p) => <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>)}
+        {PETS.map((p, i) => i < PETS_REVEALED
+          ? <li><Image src={p.img} alt={`Familier ${p.name}`} width={96} height={96} /><span>{p.name}</span></li>
+          : <li class="lockedpet"><Image src={lockedPetImg(p.id)} alt="Familier mystère" width={80} height={80} /><span>???</span></li>)}
       </ul>
     </div>
   </section>
@@ -193,15 +198,12 @@ const steps = [
       <div class="grid g2 prog">
         <article class="card"><Image src={bBoot} alt="Bottes ailées, bonus d'Idle Walk" width={72} height={72} /><h3>Des bonus à acheter</h3><p>Permanents ou temporaires (« ×2 pièces par pas pendant 1 h »), les bonus font grimper ton nombre de pièces par pas. Plus tu avances, plus ils sont puissants.</p></article>
         <article class="card"><Image src={bChest} alt="Coffre au trésor, récompense de défi" width={72} height={72} /><h3>Des défis jour et semaine</h3><p>Marcher 1 000 ou 3 000 pas, acheter des bonus, récolter des ressources : réclame les pièces de chaque défi terminé.</p></article>
-        <article class="card"><Image src={mushroom} alt="Champignon, ressource récoltée en marchant" width={72} height={72} /><h3>Des ressources à récolter</h3><p>En marchant, tu ramasses les ressources de ta zone (trèfles, coquillages, bonbons…) et tu consultes tes compteurs.</p></article>
+        <article class="card"><Image src={mushroom} alt="Champignon, ressource récoltée en marchant" width={72} height={72} /><h3>Des ressources à récolter</h3><p>En marchant, tu ramasses les ressources de ta zone (trèfles, coquillages…) et tu consultes tes compteurs.</p></article>
         <article class="card"><Image src={star} alt="Étoile de série de jours" width={72} height={72} /><h3>Une série de jours</h3><p>Atteins 5 000 pas par jour plusieurs jours d'affilée et réclame des paliers de récompenses : pièces, ressources, un œuf.</p></article>
       </div>
       <div class="bosses">
         <Image src={bossVallee} alt="Le zombie, boss de la Vallée verte" width={88} height={102} />
-        <Image src={bossCote} alt="Le crabe, boss de la Côte tropicale" width={88} height={102} />
-        <Image src={bossBanquise} alt="Le pingouin, boss de la Banquise" width={88} height={102} />
-        <Image src={bossRecif} alt="Le requin, boss du Récif englouti" width={88} height={102} />
-        <p>Des combats de boss gardent l'accès aux zones : le zombie, le crabe, la sorcière, le pingouin, le requin… à toi de les distancer.</p>
+        <p>Des combats de boss gardent l'accès aux zones. Voici le premier, le zombie : à toi de le distancer, et de découvrir les autres.</p>
       </div>
       <div class="chars">
         <p><strong>Choisis ton personnage</strong> parmi 6 marcheurs à l'avatar mignon.</p>
@@ -299,6 +301,9 @@ const steps = [
   .zone { background: var(--tint); padding: 1rem 1rem 1.3rem; }
   .zimg { background: var(--tint); border-radius: 14px; margin-bottom: .6rem; overflow: hidden; }
   .zone img { width: 100%; height: auto; }
+  .zone.locked { opacity: .92; }
+  .zone.locked h3 { letter-spacing: .15em; }
+  .lockedpet span { letter-spacing: .15em; }
   .zres { margin: 0 0 .3em; color: var(--muted); }
   .zbonus { margin: 0; font-weight: 700; font-size: .98rem; }
 
