@@ -21,14 +21,18 @@ Copie `.env.example` en `.env`.
 
 | Variable | Rôle |
 |---|---|
-| `SITE_URL` | URL finale (canonicals, Open Graph, sitemap, robots). **À définir avant la mise en ligne** (défaut : `https://idle-walk.pages.dev`) |
+| `SITE_URL` | URL finale (canonicals, Open Graph, sitemap, robots). **À définir avant la mise en ligne** (défaut : `https://idle-walk.cozy-codeur.fr`) |
 | `PUBLIC_GSC_VERIFICATION` | balise de vérification Google Search Console |
 | `PUBLIC_GA_ID` | Google Analytics 4 (`G-…`) |
 | `PUBLIC_PLAUSIBLE_DOMAIN` | Plausible (sans cookie) |
 
-Vide = aucun script chargé. Constantes (lien Play, liens légaux, e-mail de contact) : `src/config.ts`.
+Vide = aucun script chargé. Constantes (lien Play, liens légaux) : `src/config.ts`.
 
 ## Déploiement gratuit
+**Choix retenu : GitHub Pages + `idle-walk.cozy-codeur.fr`** — workflow `.github/workflows/deploy.yml` (déploiement à chaque push sur `main`) et `public/CNAME` déjà en place. Reste : créer le dépôt GitHub, activer Pages (Source : GitHub Actions), puis DNS : enregistrement CNAME `idle-walk` → `<ton-user>.github.io`.
+
+Alternatives :
+
 **Cloudflare Pages** (recommandé) : connecter le dépôt Git → build `npm run build`, dossier `dist`, variable `SITE_URL`. Domaine perso : *Custom domains*, puis mettre `SITE_URL` à jour et relancer un build.
 
 **GitHub Pages** : build avec `SITE_URL=https://<user>.github.io/<repo>` (si sous-dossier, ajouter `base` dans `astro.config.mjs`), publier `dist/` (action `actions/deploy-pages`). Domaine perso : fichier `public/CNAME`.

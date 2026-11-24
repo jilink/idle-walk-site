@@ -10,7 +10,6 @@ export const TERMS_URL =
   'https://funky-share-bf6.notion.site/Conditions-d-utilisation-Idle-Walk-3e47acdf0c2e8047bc32f930d2e8081d?pvs=73';
 export const SUPPORT_URL =
   'https://funky-share-bf6.notion.site/Assistance-Idle-Walk-3e77acdf0c2e80ec8c67e0aa4d58d96b?pvs=73';
-export const CONTACT_EMAIL = 'jimmy.soussan@gmail.com';
 
 // Analytics / Search Console : optionnels. Renseigne-les dans .env (voir .env.example).
 export const GA_ID = import.meta.env.PUBLIC_GA_ID || '';

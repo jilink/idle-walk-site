@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import Seo from '../components/Seo.astro';
 import PlayBadge from '../components/PlayBadge.astro';
 import icon from '../assets/brand/icon.webp';
-import { NAV, PLAY_URL, PRIVACY_URL, TERMS_URL, SUPPORT_URL, CONTACT_EMAIL, GA_ID, PLAUSIBLE_DOMAIN, SITE_NAME } from '../config';
+import { NAV, PLAY_URL, PRIVACY_URL, TERMS_URL, SUPPORT_URL, GA_ID, PLAUSIBLE_DOMAIN, SITE_NAME } from '../config';
 
 interface Props {
   title: string;
@@ -90,7 +90,6 @@ const ld = [org, ...(breadcrumb ? [breadcrumb] : []), ...jsonLd];
             <li><a href={PRIVACY_URL} rel="noopener">Politique de confidentialité</a></li>
             <li><a href={TERMS_URL} rel="noopener">Conditions d'utilisation</a></li>
             <li><a href={SUPPORT_URL} rel="noopener">Assistance</a></li>
-            <li><a href={`mailto:${CONTACT_EMAIL}`}>Nous contacter</a></li>
           </ul>
         </nav>
       </div>
