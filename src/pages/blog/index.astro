@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import { getPosts, CATEGORIES, fmtDate, readingMinutes } from '../../data/blog';
+const posts = await getPosts();
+---
+<Base
+  title="Blog marche et motivation | Idle Walk"
+  description="Conseils pour marcher plus souvent, comprendre les pas et le podomètre, et rester motivé : le blog d'Idle Walk, le jeu de marche pour Android."
+  path="/blog/"
+  crumbs={[{ name: 'Blog', path: '/blog/' }]}
+>
+  <section class="phead band-green">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <span>Blog</span></nav>
+      <h1>Le blog Idle Walk</h1>
+      <p class="lead">Marche, pas du quotidien, podomètre et motivation : des idées simples pour bouger plus, sans se prendre la tête.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {posts.length === 0 && <p>Les premiers articles arrivent bientôt.</p>}
+      <div class="grid g3">
+        {posts.map((p) => (
+          <a class="card post" href={`/blog/${p.id}/`}>
+            <span class="eyebrow">{CATEGORIES[p.data.category]}</span>
+            <h2>{p.data.title}</h2>
+            <p>{p.data.description}</p>
+            <small>{fmtDate(p.data.date)} · {readingMinutes(p.body)} min de lecture</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCta place="blog-final" />
+</Base>
+<style>
+  .phead { padding-block: 1.2rem clamp(40px, 6vw, 72px); }
+  .crumbs { font-weight: 800; font-size: .9rem; margin-bottom: 1.2rem; }
+  .crumbs a { color: var(--ink); }
+  h1 { font-size: clamp(2rem, 6vw, 3.2rem); text-shadow: 0 3px 0 #ffffff80; }
+  .lead { color: var(--ink); max-width: 640px; }
+  .post { text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: .5rem; transition: transform .12s; }
+  .post:hover { transform: translateY(-3px); color: var(--ink); }
+  .post h2 { font-size: 1.25rem; color: var(--green-deep); margin: 0; }
+  .post p { margin: 0; flex: 1; }
+  .post small { color: var(--muted); font-weight: 700; }
+  .post .eyebrow { align-self: flex-start; }
+</style>

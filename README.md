@@ -6,6 +6,7 @@ Projet indépendant de l'app mobile (`../idle-walk`, jamais modifiée).
 
 ## Pages
 `/` · `/jeu-de-marche/` · `/podometre-ludique/` · `/motivation-marche/` · `/faq/` · `404`
++ `/blog/` et ses articles (`src/content/blog/`)
 + `sitemap-index.xml` et `robots.txt` générés au build.
 
 ## Commandes
@@ -15,6 +16,9 @@ npm run dev       # http://localhost:4321
 npm run build     # sortie dans dist/
 npm run preview   # sert dist/ en local
 ```
+
+## Blog
+Un fichier Markdown par article dans `src/content/blog/`. La commande `/blog` (Claude Code) fait la recherche de sujets, rédige 2 articles, lance `npm run blog:check` + le build et ouvre une PR à merger à la main. Détails : `.claude/commands/blog.md`.
 
 ## Configuration (tout optionnel)
 Copie `.env.example` en `.env`.

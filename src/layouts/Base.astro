@@ -54,7 +54,7 @@ const ld = [org, ...(breadcrumb ? [breadcrumb] : []), ...jsonLd];
           <span>Idle Walk</span>
         </a>
         <nav aria-label="Navigation principale" class="desk">
-          {NAV.map((n) => <a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>)}
+          {NAV.map((n) => <a href={n.href} aria-current={path === n.href || (n.href === '/blog/' && path.startsWith('/blog/')) ? 'page' : undefined}>{n.label}</a>)}
         </nav>
         <a class="btn small deskbtn" href={PLAY_URL} rel="noopener" data-place="header">Télécharger</a>
         <details class="burger">

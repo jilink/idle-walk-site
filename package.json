@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "images": "node scripts/optimize-images.mjs"
+    "images": "node scripts/optimize-images.mjs",
+    "blog:research": "node scripts/blog-research.mjs",
+    "blog:check": "node scripts/check-blog.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",

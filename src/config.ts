@@ -21,5 +21,6 @@ export const NAV = [
   { href: '/jeu-de-marche/', label: 'Le jeu' },
   { href: '/podometre-ludique/', label: 'Podomètre' },
   { href: '/motivation-marche/', label: 'Motivation' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/faq/', label: 'FAQ' },
 ];
